@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package grpc.test.common;
+
+
+// 为了兼容以前的接口，这里放置了比较多的字段
+message Paginator {
+    int32 page_count = 1 [json_name = "page_count"];
+    int32 total_count = 2 [json_name = "total_count"];
+    int32 items_count_per_page = 3 [json_name = "items_count_per_page"]; // 每页的内容个数
+    int32 next_page = 4 [json_name = "next_page"]; // 下一个分页的页码 ID，没有下一页时，为 0
+}

@@ -1,0 +1,43 @@
+# usermod -aG docker gitlab-runner
+
+stages:
+  - cs-fix
+  - test
+
+variables:
+  PROJECT_NAME: ${CI_PROJECT_NAME}
+
+cs-fix:
+  stage: cs-fix
+  before_script:
+    - git remote set-url origin git@gitlab.xxxxx.mobi:server/${PROJECT_NAME}.git
+  script:
+    - |
+      git checkout ${CI_COMMIT_REF_NAME}
+      git pull origin master
+      composer install
+      composer cs-fix
+      has_change_local=`git status | grep -E '(Changes to be committed|Changes not staged for commit|Untracked files)' || true`
+      if [ ! -z "$has_change_local" ]; then
+        /usr/local/git/bin/git add .
+        /usr/local/git/bin/git commit -m 'auto code style fix'
+        git pull
+        git push origin master
+      fi
+  only:
+    - master
+    - dev
+  tags:
+    - build
+
+run_test:
+  stage: test
+  before_script:
+    - composer install
+  script:
+    - composer test
+  only:
+    - master
+    - dev
+  tags:
+    - test
