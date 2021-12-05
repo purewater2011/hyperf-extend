@@ -100,19 +100,6 @@ class HttpServerCoreMiddleware extends CoreMiddleware
         return $injections;
     }
 
-    protected function createDispatcher(string $serverName): Dispatcher
-    {
-        // TODO: 暂时把动态注入后台管理报表相关的路由代码放置在这里，因为没找到应该放置的位置
-        // worker 启动之后再调用 addRoute 不会生效
-        $config = ApplicationContext::getContainer()->get(ConfigInterface::class);
-        // 增加 ping 响应支持，以便挂载在 SLB 下做服务监测
-        Router::addRoute(['GET', 'HEAD'], '/ping', function () {
-            return $this->response()->withBody(new SwooleStream('PONG'));
-        });
-
-        return parent::createDispatcher($serverName);
-    }
-
     private function createGrpcParamFromRequest(string $class_name): Message
     {
         /** @var Message $instance */
