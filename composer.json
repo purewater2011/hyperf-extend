@@ -28,9 +28,6 @@
     "hyperf/config-center": "~2.2.0",
     "hyperf/config-aliyun-acm": "~2.2.0",
     "nesbot/carbon": "*",
-    "starfalling/ipip": ">=1.0.4",
-    "ipip/db": "^1.0",
-    "qiniu/php-sdk": "7.2.7",
     "ext-openssl": "*",
     "ext-iconv": "*",
     "ext-redis": "*",
@@ -38,7 +35,6 @@
     "smi2/phpclickhouse": "1.2.4",
     "hyperf/snowflake": "~2.2.0",
     "godruoyi/php-snowflake": "^1.1",
-    "sy-records/thrift2-hbase": "^1.0.2",
     "guzzlehttp/guzzle": "^7.0"
   },
   "require-dev": {
