@@ -52,6 +52,18 @@ class ClientInfoUtil
         return HttpRequest::current()->server('remote_addr', $default);
     }
 
+    public static function getUserAgent($default = null)
+    {
+        if (empty(HttpRequest::current())) {
+            return $default;
+        }
+        $remote_address = HttpRequest::getHeader('User-Agent');
+        if (!empty($remote_address)) {
+            return $remote_address;
+        }
+        return $default;
+    }
+
     /**
      * 对url进行编码转换，返回编码之后的url地址，目前的解析参照firefox对url的解析进行
      * 英文标点中除 ()<>'" 这六个以外，其余都不进行编码原样返回
