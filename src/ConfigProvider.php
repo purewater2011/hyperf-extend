@@ -63,9 +63,6 @@ class ConfigProvider
                         'OpenApi\Annotations\Get',
                         'OpenApi\Annotations\Post',
                     ],
-                    'class_map' => [
-                        Connection::class => dirname(__DIR__) . '/class_map/db/Connection.php'
-                    ],
                 ],
             ],
             'listeners' => [
