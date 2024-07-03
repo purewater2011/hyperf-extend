@@ -43,7 +43,7 @@ class ConfigUtil
             }
             if (is_string($config_item)) {
                 $segs = explode(':', $config_item);
-                return ['host' => DNS::resolve($segs[0]), 'port' => isset($segs[1]) ? intval($segs[1]) : 3306];
+                return ['host' => $segs[0], 'port' => isset($segs[1]) ? intval($segs[1]) : 3306];
             }
             throw new RuntimeException('unexpected mysql server info ' . json_encode($config_item));
         };
